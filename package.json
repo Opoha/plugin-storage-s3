@@ -1,6 +1,6 @@
 {
   "name": "@opoha/plugin-storage-s3",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Official Opoha S3-compatible object storage adapter plugin (Phase 9 E-01 scaffold)",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
   ],
   "opoha": {
     "id": "storage-s3",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "contractVersion": "0.1",
     "entry": "dist/index.js",
     "displayName": "S3 Storage",
