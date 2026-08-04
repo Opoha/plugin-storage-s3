@@ -1,11 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import {
-  MIGRATIONS_TABLE_NAME,
-  PLUGIN_ID,
-  entities,
-  migrations,
-} from './database.js';
+import { MIGRATIONS_TABLE_NAME, PLUGIN_ID, entities, migrations } from './database.js';
 import storageS3 from './index.js';
 import { S3StorageAdapter, assertValidS3Key, resolveS3Bucket } from './s3-adapter.js';
 import { StorageS3Init1722800100000 } from './migrations/1722800100000-StorageS3Init.js';
@@ -61,9 +56,7 @@ describe('@opoha/plugin-storage-s3', () => {
   });
 
   it('resolves bucket from env and rejects invalid keys', () => {
-    expect(resolveS3Bucket(undefined, { OPOHA_STORAGE_S3_BUCKET: 'my-bucket' })).toBe(
-      'my-bucket',
-    );
+    expect(resolveS3Bucket(undefined, { OPOHA_STORAGE_S3_BUCKET: 'my-bucket' })).toBe('my-bucket');
     expect(resolveS3Bucket(undefined, {})).toBe('opoha-storage');
     expect(() => assertValidS3Key('')).toThrow(/storage key is required/);
     expect(() => assertValidS3Key('a\0b')).toThrow(/null bytes/);
@@ -86,14 +79,10 @@ describe('@opoha/plugin-storage-s3', () => {
     expect(new TextDecoder().decode(got)).toBe('hello-opoha');
 
     const url = await adapter.getUrl('orders/receipt.txt');
-    expect(url).toBe(
-      'https://test-bucket.s3.eu-west-1.amazonaws.com/orders/receipt.txt',
-    );
+    expect(url).toBe('https://test-bucket.s3.eu-west-1.amazonaws.com/orders/receipt.txt');
 
     await adapter.delete('orders/receipt.txt');
-    await expect(adapter.get('orders/receipt.txt')).rejects.toThrow(
-      /object not found/,
-    );
+    await expect(adapter.get('orders/receipt.txt')).rejects.toThrow(/object not found/);
   });
 
   it('uses publicBaseUrl for getUrl when configured', async () => {
@@ -102,9 +91,7 @@ describe('@opoha/plugin-storage-s3', () => {
       publicBaseUrl: 'https://cdn.example.com',
     });
     await adapter.put({ key: 'a/b.txt', body: new Uint8Array([1, 2, 3]) });
-    expect(await adapter.getUrl('a/b.txt')).toBe(
-      'https://cdn.example.com/a/b.txt',
-    );
+    expect(await adapter.getUrl('a/b.txt')).toBe('https://cdn.example.com/a/b.txt');
   });
 
   it('exposes plugin-owned entities and namespaced migrations table', () => {
@@ -119,17 +106,11 @@ describe('@opoha/plugin-storage-s3', () => {
     const migration = new StorageS3Init1722800100000();
     const upRunner = createQueryRunnerMock();
     await migration.up(upRunner as never);
-    expect(upRunner.queries.join('\n')).toContain(
-      'CREATE TABLE "storage_s3_settings"',
-    );
-    expect(upRunner.queries.join('\n')).not.toMatch(
-      /ALTER TABLE "(users|roles|files)"/i,
-    );
+    expect(upRunner.queries.join('\n')).toContain('CREATE TABLE "storage_s3_settings"');
+    expect(upRunner.queries.join('\n')).not.toMatch(/ALTER TABLE "(users|roles|files)"/i);
 
     const downRunner = createQueryRunnerMock();
     await migration.down(downRunner as never);
-    expect(downRunner.queries.join('\n')).toContain(
-      'DROP TABLE IF EXISTS "storage_s3_settings"',
-    );
+    expect(downRunner.queries.join('\n')).toContain('DROP TABLE IF EXISTS "storage_s3_settings"');
   });
 });

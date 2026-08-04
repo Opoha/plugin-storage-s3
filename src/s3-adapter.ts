@@ -1,8 +1,4 @@
-import type {
-  StorageAdapter,
-  StoragePutInput,
-  StoragePutResult,
-} from '@opoha/plugin-sdk';
+import type { StorageAdapter, StoragePutInput, StoragePutResult } from '@opoha/plugin-sdk';
 
 /**
  * Resolves the configured bucket name.

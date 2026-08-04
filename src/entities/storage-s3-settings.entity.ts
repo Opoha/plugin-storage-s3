@@ -1,9 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 /** OWNER: @opoha/plugin-storage-s3 — settings for bucket/region (ADR-0005). */
 @Entity({ name: 'storage_s3_settings' })
