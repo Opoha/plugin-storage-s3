@@ -41,7 +41,7 @@ type StoredObject = { body: Uint8Array; contentType?: string };
 /**
  * S3-compatible StorageAdapter stub — put/get/delete/getUrl against an
  * in-memory object map shaped like S3 semantics (bucket + key). No AWS SDK
- * dependency (Phase 9 E-01 scaffold only) — mirrors the stripe/omise stub
+ * dependency — mirrors the stripe/omise stub
  * pattern (ADR-0003); live SDK wiring can replace the in-memory store
  * without changing engine contracts.
  */

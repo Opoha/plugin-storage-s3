@@ -1,7 +1,7 @@
 import type { MigrationInterface, QueryRunner } from 'typeorm';
 
 /**
- * Initial settings table for S3 storage plugin (Phase 9 E-01 / ADR-0005).
+ * Initial settings table for S3 storage plugin (ADR-0005).
  * Table prefix: plugin id `storage-s3` → `storage_s3_*`.
  * Object bytes live in the bucket; this table only stores optional config.
  */
