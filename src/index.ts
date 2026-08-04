@@ -6,7 +6,7 @@ export { S3StorageAdapter, resolveS3Bucket, assertValidS3Key } from './s3-adapte
 export type { S3StorageAdapterOptions } from './s3-adapter.js';
 
 /**
- * Official S3-compatible storage plugin (Phase 9 E-01).
+ * Official S3-compatible storage plugin.
  * Registers a StorageAdapter with put/get/delete/getUrl shaped after the
  * S3 API. Live AWS SDK wiring is intentionally out of scope for this
  * scaffold — mirrors the storage-localfs pattern (ADR-0003).
